@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BG. Gayan Privantha - Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #f5f7fa;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .resume-container {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            position: relative;
+        }
+        
+        .photo-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid white;
+            flex-shrink: 0;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .photo-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        
+        .photo-container:hover::after {
+            content: 'Click to upload/edit photo';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 12px;
+            padding: 5px;
+            text-align: center;
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ddd;
+            color: #777;
+            font-size: 14px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .header-text {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+        
+        .left-column {
+            flex: 1;
+            background: var(--light);
+            padding: 30px;
+        }
+        
+        .right-column {
+            flex: 2;
+            padding: 30px;
+        }
+        
+        section {
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2 i {
+            color: var(--primary);
+        }
+        
+        h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .experience-item, .education-item {
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 3px solid var(--primary);
+            padding-bottom: 15px;
+        }
+        
+        .date {
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill {
+            background-color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .languages {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .language {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .results-table th, .results-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .results-table th {
+            background-color: var(--light);
+            color: var(--secondary);
+        }
+        
+        .certificates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .certificate {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .certificate:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .modal h3 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .image-preview {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 20px;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #image-cropper {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .controls {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .control-group label {
+            min-width: 100px;
+            text-align: right;
+        }
+        
+        .control-group input {
+            flex: 1;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .auto-fit-options {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .fit-btn {
+            padding: 8px 15px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .fit-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2ecc71;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .certificates {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-preview {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .control-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .control-group label {
+                min-width: auto;
+                text-align: left;
+            }
+            
+            .auto-fit-options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">Photo uploaded successfully!</div>
+    
+    <!-- Photo Editor Modal -->
+    <div class="modal" id="photo-modal">
+        <div class="modal-content">
+            <h3>Edit Your Photo</h3>
+            
+            <div class="auto-fit-options">
+                <button class="fit-btn active" id="fit-cover">Fit to Cover</button>
+                <button class="fit-btn" id="fit-contain">Fit to Contain</button>
+                <button class="fit-btn" id="auto-center">Auto Center</button>
+            </div>
+            
+            <div class="image-preview">
+                <img id="image-cropper" src="" alt="Image to crop">
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label for="zoom">Zoom:</label>
+                    <input type="range" id="zoom" min="0.5" max="2" step="0.1" value="1">
+                </div>
+                <div class="control-group">
+                    <label for="position-x">Position X:</label>
+                    <input type="range" id="position-x" min="-100" max="100" value="0">
+                </div>
+                <div class="control-group">
+                    <label for="position-y">Position Y:</label>
+                    <input type="range" id="position-y" min="-100" max="100" value="0">
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="cancel-btn">Cancel</button>
+                <button class="btn btn-primary" id="save-btn">Save Photo</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="resume-container">
+        <div class="header">
+            <div class="photo-container" id="photo-container">
+                <div class="photo-placeholder">
+                    <span id="placeholder-text">Click to add photo</span>
+                    <img id="profile-photo" src="" alt="Profile Photo">
+                </div>
+            </div>
+            <div class="header-text">
+                <h1>BG. GAYAN </h1>
+                <p class="tagline">Reliable, motivated, proactive professional</p>
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fas fa-phone"></i> 0762724950</div>
+                    <div class="contact-item"><i class="fas fa-envelope"></i> gayangayan474@gmail.com</div>
+                    <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Sri Lanka, Kandy/Pussellawa</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="left-column">
+                <section id="skills">
+                    <h2><i class="fas fa-tools"></i> Skills</h2>
+                    <div class="skills-container">
+                        <div class="skill">Communication</div>
+                        <div class="skill">Creativity</div>
+                        <div class="skill">Leadership</div>
+                        <div class="skill">Adaptability</div>
+                        <div class="skill">Problem-solving</div>
+                        <div class="skill">Teamwork</div>
+                        <div class="skill">Openness</div>
+                        <div class="skill">Web Development</div>
+                        <div class="skill">Firebase</div>
+                        <div class="skill">Database Management</div>
+                        <div class="skill">Data Analysis</div>
+                        <div class="skill">IT Support</div>
+                    </div>
+                </section>
+                
+                <section id="languages">
+                    <h2><i class="fas fa-language"></i> Languages</h2>
+                    <div class="languages">
+                        <div class="language">Tamil</div>
+                        <div class="language">Sinhala</div>
+                        <div class="language">English</div>
+                    </div>
+                </section>
+                
+                <section id="education">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    <div class="education-item">
+                        <h3>Bachelor of Arts (BA)</h3>
+                        <p class="date">August 2022 - Present</p>
+                        <p>University of Jaffna, Sri Lanka</p>
+                    </div>
+                    <div class="education-item">
+                        <h3>Diploma in HRM</h3>
+                        <p class="date">March 2025 - Present</p>
+                        <p>Colombo, Sri Lanka</p>
+                    </div>
+                    <div class="education-item">
+                        <h3>Diploma in Data Analytics</h3>
+                        <p class="date">May 2025 - August 2025</p>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="right-column">
+                <section id="summary">
+                    <h2><i class="fas fa-user"></i> Professional Summary</h2>
+                    <p>Motivated and adaptable professional with strong problem-solving and communication skills. Skilled in IT support, web development, Firebase integration, database management, and data analysis. Quick to learn new tools and deliver accurate, efficient results while maintaining a collaborative approach.</p>
+                </section>
+                
+                <section id="experience">
+                    <h2><i class="fas fa-briefcase"></i> Experience</h2>
+                    <div class="experience-item">
+                        <h3>Marketing-Singer - Finance</h3>
+                        <p class="date">April 2025 - 2025</p>
+                        <p>Basic Staff, Sri Lanka, Jaffna</p>
+                    </div>
+                    <div class="experience-item">
+                        <h3>Marketing-Pickme</h3>
+                        <p class="date">April 2025 - 2025</p>
+                        <p>Basic Staff, Sri Lanka, Jaffna</p>
+                    </div>
+                    <div class="experience-item">
+                        <h3>Leader-Social Project - UOJ</h3>
+                        <p class="date">January 2023 - January 2024</p>
+                        <p>Leader, Sri Lanka, Kandy</p>
+                    </div>
+                    <div class="experience-item">
+                        <h3>AC Youth Forum</h3>
+                        <p class="date">January 2025 - Present</p>
+                        <p>Member, Sri Lanka, Jaffna</p>
+                    </div>
+                </section>
+                
+                <section id="certificates">
+                    <h2><i class="fas fa-certificate"></i> Certificates</h2>
+                    <div class="certificates">
+                        <div class="certificate">Essential of MS Excel</div>
+                        <div class="certificate">Fundamentals of English</div>
+                        <div class="certificate">Basic Accounting</div>
+                        <div class="certificate">Digital Marketing Basics</div>
+                        <div class="certificate">Interactive English</div>
+                        <div class="certificate">Generative AI</div>
+                        <div class="certificate">Fundamentals of IT</div>
+                        <div class="certificate" style="border-left-color: #e74c3c;">Web Development</div>
+                    </div>
+                </section>
+                
+                <section id="results">
+                    <h2><i class="fas fa-chart-bar"></i> Examination Results</h2>
+                    <table class="results-table">
+                        <tr>
+                            <th>O/L Subjects</th>
+                            <th>Grades</th>
+                            <th>A/L Subjects</th>
+                            <th>Grades</th>
+                        </tr>
+                        <tr>
+                            <td>Tamil</td>
+                            <td>B</td>
+                            <td>Tamil</td>
+                            <td>B</td>
+                        </tr>
+                        <tr>
+                            <td>Religion</td>
+                            <td>A</td>
+                            <td>Geography</td>
+                            <td>B</td>
+                        </tr>
+                        <tr>
+                            <td>Civics</td>
+                            <td>B</td>
+                            <td>P.Science</td>
+                            <td>B</td>
+                        </tr>
+                        <tr>
+                            <td>History</td>
+                            <td>B</td>
+                            <td>Z.Score</td>
+                            <td>1.3069</td>
+                        </tr>
+                        <tr>
+                            <td>HSPT</td>
+                            <td>B</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Arts</td>
+                            <td>C</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td>C</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Maths</td>
+                            <td>S</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Science</td>
+                            <td>S</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input -->
+    <input type="file" id="photo-input" accept="image/*" style="display: none;">
+
+    <script>
+        // Get DOM elements
+        const photoContainer = document.getElementById('photo-container');
+        const photoInput = document.getElementById('photo-input');
+        const profilePhoto = document.getElementById('profile-photo');
+        const placeholderText = document.getElementById('placeholder-text');
+        const notification = document.getElementById('notification');
+        const modal = document.getElementById('photo-modal');
+        const imageCropper = document.getElementById('image-cropper');
+        const zoomSlider = document.getElementById('zoom');
+        const positionXSlider = document.getElementById('position-x');
+        const positionYSlider = document.getElementById('position-y');
+        const saveBtn = document.getElementById('save-btn');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const fitCoverBtn = document.getElementById('fit-cover');
+        const fitContainBtn = document.getElementById('fit-contain');
+        const autoCenterBtn = document.getElementById('auto-center');
+        
+        let currentImage = null;
+        let originalImageWidth = 0;
+        let originalImageHeight = 0;
+        let currentFitMode = 'cover';
+        
+        // Click on photo container to trigger file input
+        photoContainer.addEventListener('click', function() {
+            photoInput.click();
+        });
+        
+        // Handle file selection
+        photoInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Check if file is an image
+                if (!file.type.match('image.*')) {
+                    showNotification('Please select an image file', 'error');
+                    return;
+                }
+                
+                // Check file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    showNotification('Image must be less than 5MB', 'error');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Show the modal with the image
+                    imageCropper.src = e.target.result;
+                    currentImage = e.target.result;
+                    modal.style.display = 'flex';
+                    
+                    // Get original image dimensions
+                    const img = new Image();
+                    img.onload = function() {
+                        originalImageWidth = img.width;
+                        originalImageHeight = img.height;
+                        
+                        // Apply auto-fit based on selected mode
+                        applyAutoFit();
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Auto-fit buttons
+        fitCoverBtn.addEventListener('click', function() {
+            setActiveFitButton(fitCoverBtn);
+            currentFitMode = 'cover';
+            applyAutoFit();
+        });
+        
+        fitContainBtn.addEventListener('click', function() {
+            setActiveFitButton(fitContainBtn);
+            currentFitMode = 'contain';
+            applyAutoFit();
+        });
+        
+        autoCenterBtn.addEventListener('click', function() {
+            setActiveFitButton(autoCenterBtn);
+            positionXSlider.value = 0;
+            positionYSlider.value = 0;
+            updateImage();
+        });
+        
+        function setActiveFitButton(activeButton) {
+            // Remove active class from all buttons
+            fitCoverBtn.classList.remove('active');
+            fitContainBtn.classList.remove('active');
+            autoCenterBtn.classList.remove('active');
+            
+            // Add active class to clicked button
+            activeButton.classList.add('active');
+        }
+        
+        function applyAutoFit() {
+            if (!originalImageWidth || !originalImageHeight) return;
+            
+            const previewWidth = 300; // Width of preview container
+            const previewHeight = 300; // Height of preview container
+            
+            let zoomValue = 1;
+            
+            if (currentFitMode === 'cover') {
+                // Scale image to cover the entire area (may crop edges)
+                const widthRatio = previewWidth / originalImageWidth;
+                const heightRatio = previewHeight / originalImageHeight;
+                zoomValue = Math.max(widthRatio, heightRatio);
+            } else if (currentFitMode === 'contain') {
+                // Scale image to fit entirely within the area
+                const widthRatio = previewWidth / originalImageWidth;
+                const heightRatio = previewHeight / originalImageHeight;
+                zoomValue = Math.min(widthRatio, heightRatio);
+            }
+            
+            // Set zoom slider value
+            zoomSlider.value = zoomValue;
+            
+            // Update the image display
+            updateImage();
+        }
+        
+        // Update image based on slider values
+        function updateImage() {
+            const zoom = zoomSlider.value;
+            const posX = positionXSlider.value;
+            const posY = positionYSlider.value;
+            
+            imageCropper.style.transform = `scale(${zoom}) translate(${posX}px, ${posY}px)`;
+        }
+        
+        // Event listeners for sliders
+        zoomSlider.addEventListener('input', updateImage);
+        positionXSlider.addEventListener('input', updateImage);
+        positionYSlider.addEventListener('input', updateImage);
+        
+        // Save button click
+        saveBtn.addEventListener('click', function() {
+            if (currentImage) {
+                // Create a canvas to crop and resize the image
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Set canvas size to match the circular photo area
+                canvas.width = 150;
+                canvas.height = 150;
+                
+                // Create a circular clipping path
+                ctx.beginPath();
+                ctx.arc(75, 75, 75, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                
+                // Draw the image with transformations
+                const img = new Image();
+                img.onload = function() {
+                    // Calculate scale and position based on slider values
+                    const zoom = parseFloat(zoomSlider.value);
+                    const posX = parseFloat(positionXSlider.value);
+                    const posY = parseFloat(positionYSlider.value);
+                    
+                    // Calculate how the preview adjustments translate to the final image
+                    const previewToFinalRatio = 150 / 300; // Final size is half of preview
+                    const finalZoom = zoom * previewToFinalRatio;
+                    const finalPosX = posX * previewToFinalRatio;
+                    const finalPosY = posY * previewToFinalRatio;
+                    
+                    // Calculate scaled dimensions
+                    const scaledWidth = img.width * finalZoom;
+                    const scaledHeight = img.height * finalZoom;
+                    
+                    // Draw the image centered with adjustments
+                    ctx.drawImage(
+                        img, 
+                        75 - scaledWidth/2 + finalPosX, 
+                        75 - scaledHeight/2 + finalPosY, 
+                        scaledWidth, 
+                        scaledHeight
+                    );
+                    
+                    // Set the profile photo to the canvas result
+                    profilePhoto.src = canvas.toDataURL('image/png');
+                    profilePhoto.style.display = 'block';
+                    placeholderText.style.display = 'none';
+                    
+                    // Close the modal
+                    modal.style.display = 'none';
+                    
+                    // Show success message
+                    showNotification('Photo saved successfully!', 'success');
+                };
+                img.src = currentImage;
+            }
+        });
+        
+        // Cancel button click
+        cancelBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Show notification
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = 'notification';
+            
+            if (type === 'error') {
+                notification.style.background = '#e74c3c';
+            } else {
+                notification.style.background = '#2ecc71';
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(function() {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Add hover effect instructions
+        photoContainer.addEventListener('mouseenter', function() {
+            if (profilePhoto.style.display === 'block') {
+                placeholderText.textContent = 'Click to edit photo';
+            } else {
+                placeholderText.textContent = 'Click to upload photo';
+            }
+        });
+        
+        photoContainer.addEventListener('mouseleave', function() {
+            if (profilePhoto.style.display === 'block') {
+                placeholderText.textContent = 'Photo uploaded';
+            } else {
+                placeholderText.textContent = 'Click to add photo';
+            }
+        });
+    </script>
+</body>
+</html>
